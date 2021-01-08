@@ -22,67 +22,72 @@ class _LoginState extends State<Login> {
   }
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _key,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: "Enter your email",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10)
-              )
-            ),
-            validator: (val)=>(val.isEmpty)?"Enter the email":null,
-            onChanged: (val){
-              setState(() {
-                em=val;
-              });
-            },
-          ),
-          TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-                hintText: "Enter your Password",
+    return Container(
+      margin: EdgeInsets.only(left: 10,right:10),
+      child: Form(
+        key: _key,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: "Enter your email",
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10)
+                  borderRadius: BorderRadius.circular(10)
                 )
+              ),
+              validator: (val)=>(val.isEmpty)?"Enter the email":null,
+              onChanged: (val){
+                setState(() {
+                  em=val;
+                });
+              },
             ),
-            validator: (val)=>(val.isEmpty)?"Enter the password":null,
-            onChanged: (val){
-              setState(() {
-                pass=val;
-              });
+            SizedBox(height: 10,),
+            TextFormField(
+              obscureText: true,
+              decoration: InputDecoration(
+                  hintText: "Enter your Password",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)
+                  )
+              ),
+              validator: (val)=>(val.isEmpty)?"Enter the password":null,
+              onChanged: (val){
+                setState(() {
+                  pass=val;
+                });
+              },
+            ),
+            SizedBox(height: 10,),
+            RaisedButton(onPressed: () async{
+              if(_key.currentState.validate())
+                {
+                  final user=await _auth.signInUser(em, pass);
+                  if(user==null)
+                  {
+
+                  }
+                  else
+                  {
+                    _key.currentState.reset();
+                    await Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomePage()));
+
+                  }
+                }
+
+
+            },child: Text("Login"),),
+            RaisedButton(onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Registration()));
             },
-          ),
-          RaisedButton(onPressed: () async{
-            if(_key.currentState.validate())
-              {
-                final user=await _auth.signInUser(em, pass);
-                if(user==null)
-                {
+            child: Text(
+              "Don't have an Account ? \nRegister"
+            ),)
+          ],
+        ),
 
-                }
-                else
-                {
-                  _key.currentState.reset();
-                  await Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomePage()));
-
-                }
-              }
-
-
-          },child: Text("Login"),),
-          RaisedButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Registration()));
-          },
-          child: Text(
-            "Don't have an Account ? \nRegister"
-          ),)
-        ],
       ),
-      
     );
   }
 }
