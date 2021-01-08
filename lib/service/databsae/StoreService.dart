@@ -36,6 +36,7 @@ class StoreService {
   }
 
   Stream<List<Todo>> getStreamData() {
+    print("User work " + user.toString());
     return _firebaseFirestore.collection(user.uid).snapshots().map((doc) => doc.docs.map((tot) =>Todo.fromMap(tot.data())).toList());
 
   }

@@ -3,7 +3,6 @@ import 'package:brainants_todoapp/service/authentication/authentication.dart';
 import 'package:brainants_todoapp/service/databsae/StoreService.dart';
 import 'package:brainants_todoapp/ui/HomePage.dart';
 import 'package:brainants_todoapp/ui/Login.dart';
-import 'package:brainants_todoapp/ui/changer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,25 +17,18 @@ void main() async {
   StoreService _store = StoreService();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MultiProvider(
-      providers: [
-        StreamProvider<AppUser>.value(
-          value: _authService.user,
-        ),
-        StreamProvider<List<Todo>>(create: (_)=>_store.getStreamData(),
+    home: MyApp(),
+    )
 
-        ),
-      ],
-      child: MyApp(),
-    ),
-  ));
+  );
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Changer()),
+      body: SafeArea(child:Login()),
     );
   }
 }
