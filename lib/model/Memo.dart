@@ -13,7 +13,6 @@ class Todo{
       "checked":this.isChecked
     };
   }
-
   factory Todo.fromMap(Map obj){
     return Todo(task: obj["task"],
     time: obj['time'],

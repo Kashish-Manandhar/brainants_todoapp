@@ -18,7 +18,7 @@ class StoreService {
 
   Future<List<Todo>> getData() async {
     QuerySnapshot snapshot =
-        await _firebaseFirestore.collection(user.uid).get();
+    await _firebaseFirestore.collection(user.uid).get();
     memoList = snapshot.docs.map((doc) => Todo.fromMap(doc.data())).toList();
     return memoList;
   }
@@ -33,6 +33,11 @@ class StoreService {
         .doc(todo.time)
         .delete()
         .then((_) => print("Deleted successfully"));
+  }
+
+  Stream<List<Todo>> getStreamData() {
+    return _firebaseFirestore.collection(user.uid).snapshots().map((doc) => doc.docs.map((tot) =>Todo.fromMap(tot.data())).toList());
+
   }
 
   void update(Todo todo) {

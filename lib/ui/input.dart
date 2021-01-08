@@ -39,16 +39,19 @@ class _InputState extends State<Input> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+
+      
       content: Container(
-        height: 100,
-        width: 150,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0)
+        ),
+
         child: SingleChildScrollView(
           child: Form(
             key: _key,
             child: Column(
               children: [
 
-                SizedBox(height: 10,),
                 TextFormField(
                   decoration: InputDecoration(
                       hintText: (widget.i==0) ? "Enter the Task" : task,
@@ -80,41 +83,43 @@ class _InputState extends State<Input> {
         ),
       ),
       actions: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.green
-          ),
-          child: FlatButton(onPressed: () async{
-              if(widget.i==0) {
-                  DateTime datetime=DateTime.now();
-                  DateFormat formate=new DateFormat("yyyy-MM-dd HH:mm:ss");
-                  setState(() {
-                    time=formate.format(datetime);
-                  });
-                  if(_key.currentState.validate())
-                    {
-                      Todo todo = new Todo(task: task,time: time,isChecked: false);
-                      await _store.addData(todo);
-                      Navigator.of(context).pop();
-                    }
-                }
-                else{
-                Todo todo = new Todo(task: task,time: time,isChecked: false);
-                  await _store.update(todo);
-                  Navigator.of(context).pop();
-                }
-
+        Center(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.green
+            ),
+            child: FlatButton(onPressed: () async{
+                if(widget.i==0) {
+                    DateTime datetime=DateTime.now();
+                    DateFormat formate=new DateFormat("yyyy-MM-dd HH:mm:ss");
+                    setState(() {
+                      time=formate.format(datetime);
+                    });
+                    if(_key.currentState.validate())
+                      {
+                        Todo todo = new Todo(task: task,time: time,isChecked: false);
+                        await _store.addData(todo);
+                        Navigator.of(context).pop();
+                      }
+                  }
+                  else{
+                  Todo todo = new Todo(task: task,time: time,isChecked: false);
+                    await _store.update(todo);
+                    Navigator.of(context).pop();
                   }
 
+                    }
 
-          , child: Text(
+
+            , child: Text(
     (widget.i==0)?"Save":"Update",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold
-                ),
-          )),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold
+                  ),
+            )),
+          ),
         )
       ],
     );

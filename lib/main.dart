@@ -1,3 +1,4 @@
+import 'package:brainants_todoapp/model/Memo.dart';
 import 'package:brainants_todoapp/service/authentication/authentication.dart';
 import 'package:brainants_todoapp/service/databsae/StoreService.dart';
 import 'package:brainants_todoapp/ui/HomePage.dart';
@@ -8,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'model/user.dart';
 
 void main() async {
@@ -23,9 +23,9 @@ void main() async {
         StreamProvider<AppUser>.value(
           value: _authService.user,
         ),
-        // StreamProvider<QuerySnapshot>.value(
-        //   value: _store.StreamData,
-        // )
+        StreamProvider<List<Todo>>(create: (_)=>_store.getStreamData(),
+
+        ),
       ],
       child: MyApp(),
     ),
