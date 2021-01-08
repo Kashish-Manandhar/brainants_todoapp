@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "915185275233",
+    "project_id": "brainantstotdoapp",
+    "storage_bucket": "brainantstotdoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915185275233:android:023f5334dea8698dc07520",
+        "android_client_info": {
+          "package_name": "com.kashish.np.brainants_todoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915185275233-n4njkl6cbep9ppgbv4gduao4l6hh212r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv4W7A3muHnoHlV18Zj1AeLtfvTKPacGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915185275233-n4njkl6cbep9ppgbv4gduao4l6hh212r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
